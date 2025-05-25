@@ -1,0 +1,18 @@
+uuid: 9430aafb-70ee-42c8-9564-b3376be01664
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus:
+      - main
+    parent: 'main:'
+name: Group
+type: group
+description: 'A Group content type where registered users can subscribe to join and participate in exclusive group content and discussions.'
+help: null
+new_revision: true
+preview_mode: 1
+display_submitted: true

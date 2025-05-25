@@ -1,0 +1,26 @@
+uuid: ce2b290c-03de-4fbb-b0e8-933d29e42a95
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.og_audience
+    - node.type.group
+    - node.type.news
+  module:
+    - og
+id: node.news.og_audience
+field_name: og_audience
+entity_type: node
+bundle: news
+label: 'Groups audience'
+description: 'OG group audience reference field.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'og:default'
+  handler_settings:
+    target_bundles:
+      group: group
+field_type: og_standard_reference

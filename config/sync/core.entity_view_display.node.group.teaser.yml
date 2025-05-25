@@ -1,0 +1,34 @@
+uuid: bc9b5682-23d3-4dea-97b5-f3d9c8b4a979
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.group.field_body
+    - field.field.node.group.field_featured_image
+    - node.type.group
+  module:
+    - og
+    - user
+id: node.group.teaser
+targetEntityType: node
+bundle: group
+mode: teaser
+content:
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+  og_group:
+    type: og_group_subscribe
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  field_body: true
+  field_featured_image: true
+  langcode: true
+  search_api_excerpt: true
