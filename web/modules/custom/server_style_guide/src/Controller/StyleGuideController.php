@@ -24,6 +24,7 @@ use Drupal\server_general\ThemeTrait\InfoCardThemeTrait;
 use Drupal\server_general\ThemeTrait\LinkThemeTrait;
 use Drupal\server_general\ThemeTrait\NewsTeasersThemeTrait;
 use Drupal\server_general\ThemeTrait\PeopleTeasersThemeTrait;
+use Drupal\server_general\ThemeTrait\PersonCardThemeTrait;
 use Drupal\server_general\ThemeTrait\QuickLinksThemeTrait;
 use Drupal\server_general\ThemeTrait\QuoteThemeTrait;
 use Drupal\server_general\ThemeTrait\SearchThemeTrait;
@@ -64,6 +65,7 @@ class StyleGuideController extends ControllerBase {
   use TagThemeTrait;
   use TitleAndLabelsThemeTrait;
   use WebformTrait;
+  use PersonCardThemeTrait;
 
 
   /**
@@ -210,6 +212,9 @@ class StyleGuideController extends ControllerBase {
 
     $element = $this->getWebformElement();
     $build[] = $this->wrapElementNoContainer($element, 'Element: Webform');
+
+    $element = $this->getPersonCardElement();
+    $build[] = $this->wrapElementNoContainer($element, 'Element: Person Card');
 
     return $build;
   }
@@ -923,6 +928,20 @@ class StyleGuideController extends ControllerBase {
       $this->getWebform('contact'),
       $this->getRandomTitle(),
       $this->buildProcessedText('Decorate one package of cauliflower in six teaspoons of plain vinegar. Try flavoring the crême fraîche gingers with clammy rum and fish sauce, simmered.'),
+    );
+  }
+
+  protected function getPersonCardElement(){
+    return $this->wrapContainerWide(
+      $this->buildElementPersonCard(
+        $this->getPlaceholderPersonImage(128),
+        'Image alt text',
+        'Jane Cooper',
+        'jane.cooper@example.com',
+        '+919999999999',
+        'Paradigm Representative',
+        'Admin'
+      )
     );
   }
 
