@@ -216,6 +216,9 @@ class StyleGuideController extends ControllerBase {
     $element = $this->getPersonCardElement();
     $build[] = $this->wrapElementNoContainer($element, 'Element: Person Card');
 
+    $element = $this->getPersonCardListElement();
+    $build[] = $this->wrapElementNoContainer($element, 'Element: Person Card List');
+
     return $build;
   }
 
@@ -931,7 +934,13 @@ class StyleGuideController extends ControllerBase {
     );
   }
 
-  protected function getPersonCardElement(){
+  /**
+   * Get Person card element.
+   *
+   * @return array
+   *   The render array.
+   */
+  protected function getPersonCardElement() {
     return $this->wrapContainerWide(
       $this->buildElementPersonCard(
         $this->getPlaceholderPersonImage(128),
@@ -943,6 +952,99 @@ class StyleGuideController extends ControllerBase {
         'Admin'
       )
     );
+  }
+
+  /**
+   * Get Person card list element.
+   *
+   * @return array
+   *   The render array.
+   */
+  protected function getPersonCardListElement() {
+    $items = [];
+
+    $values = [
+      [
+        'name' => 'Alice Johnson',
+        'organization' => 'TechNova Inc.',
+        'designation' => 'Software Engineer',
+        'email' => 'alice.j@technova.com',
+        'phone' => '+14155550101',
+      ],
+      [
+        'name' => 'Bob Smith',
+        'organization' => 'Greenline Solutions',
+        'designation' => 'Project Manager',
+        'email' => 'bob.s@greenline.io',
+        'phone' => '+14155550202',
+      ],
+      [
+        'name' => 'Carla Mendes',
+        'organization' => 'Skyreach Labs',
+        'designation' => 'UX Designer',
+        'email' => 'carla.m@skyreachlabs.com',
+      ],
+      [
+        'name' => 'David Patel',
+        'organization' => 'QuantumSoft',
+        'designation' => 'Data Scientist',
+        'email' => 'david.p@quantumsoft.org',
+        'phone' => '+14155550404',
+      ],
+      [
+        'name' => 'Emily Zhao',
+        'organization' => 'BrightPath AI',
+        'email' => 'emily.z@brightpath.ai',
+        'phone' => '+14155550505',
+      ],
+      [
+        'name' => 'Franklin Osei',
+        'organization' => 'CodeNest',
+        'designation' => 'Backend Developer',
+        'email' => 'frank.o@codenest.dev',
+        'phone' => '+14155550606',
+      ],
+      [
+        'name' => 'Grace Kim',
+        'organization' => 'VividHive',
+        'designation' => 'Product Designer',
+        'email' => 'grace.k@vividhive.com',
+        'phone' => '+14155550707',
+      ],
+      [
+        'name' => 'Hassan Ali',
+        'organization' => 'CoreSphere',
+        'email' => 'hassan.a@coresphere.io',
+      ],
+      [
+        'name' => 'Isabel Romero',
+        'organization' => 'NextEdge Labs',
+        'designation' => 'QA Analyst',
+        'email' => 'isabel.r@nextedge.com',
+        'phone' => '+14155550909',
+      ],
+      [
+        'name' => 'Jack Turner',
+        'organization' => 'FlowSync',
+        'designation' => 'Full Stack Developer',
+        'email' => 'jack.t@flowsync.dev',
+        'phone' => '+14155551010',
+      ],
+    ];
+
+    foreach ($values as $key => $value) {
+      $items[] = $this->buildElementPersonCard(
+        $this->getPlaceholderPersonImage(128),
+        'Image alt text for ' . $key . ' item',
+        $value['name'],
+        $value['email'],
+        $value['organization'],
+        $value['phone'] ?? NULL,
+        $value['designation'] ?? NULL
+      );
+    }
+
+    return $this->buildElementPersonCardList($items);
   }
 
 }
