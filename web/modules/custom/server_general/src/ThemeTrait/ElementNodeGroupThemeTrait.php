@@ -138,6 +138,16 @@ trait ElementNodeGroupThemeTrait {
       );
     }
 
+    $membership = \Drupal::entityTypeManager()
+      ->getStorage('og_membership')
+      ->loadByProperties([
+        'uid' => $account->id(),
+        'entity_type' => $group->getEntityTypeId(),
+        'entity_id' => $group->id(),
+      ]);
+    /** @var \Drupal\og\OgMembershipInterface */
+    $membership = reset($membership);
+
     // Check if the user already a member of the group.
     if (Og::isMember($group, $account)) {
       $sidebar_elements[] = [
@@ -148,21 +158,25 @@ trait ElementNodeGroupThemeTrait {
         )),
       ];
     }
-    elseif (!empty(\Drupal::entityTypeManager()
-      ->getStorage('og_membership')
-      ->loadByProperties([
-        'uid' => $account->id(),
-        'entity_type' => $group->getEntityTypeId(),
-        'entity_id' => $group->id(),
-        'state' => OgMembershipInterface::STATE_PENDING,
-      ]))) {
-      $sidebar_elements[] = [
-        '#markup' => Markup::create(sprintf(
-          'Hi %s, you already have a pending membership for the the group: %s',
-          $current_user->getAccount()->getDisplayName(),
-          $title
-        )),
-      ];
+    elseif (!empty($membership)) {
+      if ($membership->getState() == OgMembershipInterface::STATE_PENDING) {
+        $sidebar_elements[] = [
+          '#markup' => Markup::create(sprintf(
+            'Hi %s, you already have a pending membership for the the group: %s',
+            $current_user->getAccount()->getDisplayName(),
+            $title
+          )),
+        ];
+      }
+      elseif ($membership->getState() == OgMembershipInterface::STATE_BLOCKED) {
+        $sidebar_elements[] = [
+          '#markup' => Markup::create(sprintf(
+            'Hi %s, your request to join the group "%s" has been blocked.',
+            $account->getDisplayName(),
+            $title
+          )),
+        ];
+      }
     }
     else {
       $sidebar_elements[] = [

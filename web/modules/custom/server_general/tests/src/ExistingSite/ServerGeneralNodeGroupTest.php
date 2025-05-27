@@ -127,4 +127,28 @@ class ServerGeneralNodeGroupTest extends ServerGeneralTestBase {
     $this->drupalLogout();
   }
 
+  /**
+   * Test blocked state for users.
+   *
+   * @throws \Behat\Mink\Exception\ExpectationException
+   */
+  public function testGroupAccessForBlocked()
+  {
+    $user = $this->createUser([], 'FooBar');
+
+    OgMembership::create([
+      'type' => 'og_membership',
+      'entity_type' => 'node',
+      'entity_id' => $this->node->id(),
+      'uid' => $user->id(),
+      'state' => OgMembershipInterface::STATE_BLOCKED,
+    ])->save();
+
+    $this->drupalLogin($user);
+    $this->drupalGet($this->node->toUrl());
+    $this->assertSession()->statusCodeEquals(Response::HTTP_OK);
+    $this->assertSession()->pageTextContains('Hi FooBar, your request to join the group "Llama" has been blocked.');
+    $this->drupalLogout();
+  }
+
 }
