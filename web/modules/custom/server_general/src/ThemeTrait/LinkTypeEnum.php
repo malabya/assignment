@@ -7,8 +7,7 @@ namespace Drupal\server_general\ThemeTrait;
 /**
  * Enum for link type options used in theme wrappers.
  */
-enum LinkTypeEnum: string
-{
+enum LinkTypeEnum: string {
   case Email = 'email';
   case Phone = 'phone';
 }

@@ -7,8 +7,7 @@ namespace Drupal\server_general\ThemeTrait;
 /**
  * Helper method to render Person Card and Person Card List elements.
  */
-trait PersonCardThemeTrait
-{
+trait PersonCardThemeTrait {
   use ElementWrapThemeTrait;
   use TitleAndLabelsThemeTrait;
 
@@ -33,8 +32,7 @@ trait PersonCardThemeTrait
    * @return array
    *   A render array for the person card component.
    */
-  protected function buildElementPersonCard(string $image_url, string $alt, string $name, string $email, ?string $organization = NULL, ?string $phone = NULL, ?string $designation = NULL)
-  {
+  protected function buildElementPersonCard(string $image_url, string $alt, string $name, string $email, ?string $organization = NULL, ?string $phone = NULL, ?string $designation = NULL) {
     $elements = [];
     $element = [
       '#theme' => 'image',
@@ -72,7 +70,20 @@ trait PersonCardThemeTrait
     return $this->buildInnerElementLayoutWithFooter($elements, $footer_elements, TRUE);
   }
 
-  private function buildFooterElement($item, $label, LinkTypeEnum $type) {
+  /**
+   * Build the footer.
+   *
+   * @param string $item
+   *   The text.
+   * @param string $label
+   *   The label of the element.
+   * @param \Drupal\server_general\ThemeTrait\LinkTypeEnum $type
+   *   The link type.
+   *
+   * @return array
+   *   The render array.
+   */
+  private function buildFooterElement(string $item, string $label, LinkTypeEnum $type) {
     $element = $this->buildLinkFromText($item, $label, $type);
     $element = $this->wrapTextResponsiveFontSize($element, FontSizeEnum::Sm);
     $element = $this->wrapTextFontWeight($element, FontWeightEnum::Medium);
@@ -89,8 +100,8 @@ trait PersonCardThemeTrait
    * @return array
    *   A render array representing the list of person cards in a wide container.
    */
-  protected function buildElementPersonCardList($items)
-  {
+  protected function buildElementPersonCardList($items) {
     return $this->wrapContainerWide($this->buildCards($items));
   }
+
 }

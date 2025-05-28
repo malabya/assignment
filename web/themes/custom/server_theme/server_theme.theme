@@ -12,8 +12,7 @@ use Drupal\server_general\ThemeTrait\GridColEnum;
 /**
  * Implements hook_theme().
  */
-function server_theme_theme()
-{
+function server_theme_theme() {
   $info = [];
 
   $info['server_theme_container_wide'] = [
@@ -562,8 +561,7 @@ function server_theme_theme()
 /**
  * Implements hook_preprocess_page().
  */
-function server_theme_preprocess_page(array &$variables)
-{
+function server_theme_preprocess_page(array &$variables) {
   $language = \Drupal::languageManager()->getCurrentLanguage();
 
   $language_block_config = [
@@ -578,7 +576,8 @@ function server_theme_preprocess_page(array &$variables)
 
   try {
     $search_key = \Drupal::request()->query->get('key');
-  } catch (Exception $e) {
+  }
+  catch (Exception $e) {
     // For instance, we have this on malicious input.
     $search_key = '';
   }
@@ -631,8 +630,7 @@ function server_theme_preprocess_page(array &$variables)
  * On node view pages, we'll take care of showing the page title (i.e. the
  * <h1> element).
  */
-function server_theme_preprocess_page_title(array &$variables)
-{
+function server_theme_preprocess_page_title(array &$variables) {
   $node = \Drupal::routeMatch()->getParameter('node');
 
   if ($node) {
@@ -645,8 +643,7 @@ function server_theme_preprocess_page_title(array &$variables)
  *
  * Use our own page title theme.
  */
-function server_theme_theme_suggestions_page_title_alter(array &$suggestions, array $variables)
-{
+function server_theme_theme_suggestions_page_title_alter(array &$suggestions, array $variables) {
   $suggestions[] = 'server_theme_page_title';
 }
 
@@ -659,8 +656,7 @@ function server_theme_theme_suggestions_page_title_alter(array &$suggestions, ar
  * @return array
  *   Render array.
  */
-function server_theme_prepare_block(string $bid, array $config): array
-{
+function server_theme_prepare_block(string $bid, array $config): array {
   return \Drupal::service('block_plugin.view_builder')->view($bid, $config);
 }
 
@@ -683,8 +679,7 @@ function server_theme_prepare_block(string $bid, array $config): array
  * @return array
  *   Menu links array.
  */
-function server_theme_prepare_menu_links(string $menu_name)
-{
+function server_theme_prepare_menu_links(string $menu_name) {
   $menu_tree = \Drupal::service('menu.link_tree');
   // Build the typical default set of menu tree parameters.
   $parameters = $menu_tree->getCurrentRouteMenuTreeParameters($menu_name);
@@ -703,8 +698,7 @@ function server_theme_prepare_menu_links(string $menu_name)
  * @return array
  *   Menu links array.
  */
-function _server_theme_extract_menu_level(array $tree)
-{
+function _server_theme_extract_menu_level(array $tree) {
   $menu = [];
   /** @var \Drupal\Core\Menu\MenuLinkTreeElement $element */
   foreach ($tree as $element) {
@@ -743,8 +737,7 @@ function _server_theme_extract_menu_level(array $tree)
  *
  * @see https://www.drupal.org/node/3173719#comment-14891412
  */
-function server_theme_preprocess_image_style(array &$variables)
-{
+function server_theme_preprocess_image_style(array &$variables) {
   $eager_styles = [
     'hero_mobile_1x',
     'hero_mobile_2x',

@@ -77,11 +77,10 @@ trait TitleAndLabelsThemeTrait {
    * @return array
    *   Render array.
    */
-  protected function buildBadgeFromText(array $elements, BadgeColorEnum $color): array
-  {
+  protected function buildBadgeFromText(array $elements, BadgeColorEnum $color): array {
     $items = [];
 
-    if(empty($elements)) {
+    if (empty($elements)) {
       return [];
     }
 
@@ -106,14 +105,13 @@ trait TitleAndLabelsThemeTrait {
    *   The link string.
    * @param string $link_label
    *   The link label.
-   * @param \Drupal\server_general\ThemeTrait\LinkTypeEnum $color
-   *   The badge color.
+   * @param \Drupal\server_general\ThemeTrait\LinkTypeEnum $type
+   *   The link type.
    *
    * @return array
    *   Render array.
    */
-  protected function buildLinkFromText(string $element, string $link_label, LinkTypeEnum $type): array
-  {
+  protected function buildLinkFromText(string $element, string $link_label, LinkTypeEnum $type): array {
     return [
       '#theme' => 'server_theme_link_cta',
       '#link' => $element,

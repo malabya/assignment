@@ -589,6 +589,20 @@ trait ElementWrapThemeTrait {
     return array_filter($element);
   }
 
+  /**
+   * Wrap an element with a grid container.
+   *
+   * @param array $elements
+   *   The render array.
+   * @param \Drupal\server_general\ThemeTrait\GridColEnum $cols
+   *   Optional; The number of columns.
+   *   If NULL, a two col layout will be rendered.
+   * @param bool $divider
+   *   Flag for divider.
+   *
+   * @return array
+   *   Render array.
+   */
   protected function wrapContainerGrid(array $elements, GridColEnum $cols = GridColEnum::Two, bool $divider = FALSE) {
     return [
       '#theme' => 'server_theme_container_grid',
