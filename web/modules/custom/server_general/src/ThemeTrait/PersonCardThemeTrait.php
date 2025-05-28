@@ -7,8 +7,10 @@ namespace Drupal\server_general\ThemeTrait;
 /**
  * Helper method to render Person Card and Person Card List elements.
  */
-trait PersonCardThemeTrait {
+trait PersonCardThemeTrait
+{
   use ElementWrapThemeTrait;
+  use TitleAndLabelsThemeTrait;
 
   /**
    * Builds a render array for displaying a person card.
@@ -31,17 +33,50 @@ trait PersonCardThemeTrait {
    * @return array
    *   A render array for the person card component.
    */
-  protected function buildElementPersonCard(string $image_url, string $alt, string $name, string $email, ?string $organization = NULL, ?string $phone = NULL, ?string $designation = NULL) {
-    return [
-      '#theme' => 'server_theme_person_card',
-      '#image' => $image_url,
+  protected function buildElementPersonCard(string $image_url, string $alt, string $name, string $email, ?string $organization = NULL, ?string $phone = NULL, ?string $designation = NULL)
+  {
+    $elements = [];
+    $element = [
+      '#theme' => 'image',
+      '#uri' => $image_url,
       '#alt' => $alt,
-      '#name' => $name,
-      '#organization' => $organization,
-      '#designation' => $designation,
-      '#email' => $email,
-      '#phone' => $phone,
+      '#width' => 100,
     ];
+
+    $inner_elements = [];
+    $inner_elements[] = $this->wrapRoundedCornersFull($element);
+    $element = $this->wrapTextResponsiveFontSize($name, FontSizeEnum::Sm);
+    $element = $this->wrapTextFontWeight($element, FontWeightEnum::Normal);
+    $inner_elements[] = $this->wrapTextCenter($element);
+
+    if ($organization) {
+      $element = $this->wrapTextResponsiveFontSize($organization, FontSizeEnum::Sm);
+      $element = $this->wrapTextCenter($element);
+      $inner_elements[] = $this->wrapTextColor($element, TextColorEnum::Gray);
+    }
+
+    if ($designation) {
+      $inner_elements[] = $this->buildBadgeFromText([$designation], BadgeColorEnum::Green);
+    }
+
+    $elements[] = $this->wrapContainerVerticalSpacing($inner_elements, AlignmentEnum::Center);
+
+    $footer_elements_inner = [];
+    $footer_elements_inner[] = $this->buildFooterElement($email, 'Email', LinkTypeEnum::Email);
+    if ($phone) {
+      $footer_elements_inner[] = $this->buildFooterElement($phone, 'Phone', LinkTypeEnum::Phone);
+    }
+
+    $footer_elements[] = $this->wrapContainerGrid($footer_elements_inner, GridColEnum::Two, TRUE);
+
+    return $this->buildInnerElementLayoutWithFooter($elements, $footer_elements, TRUE);
+  }
+
+  private function buildFooterElement($item, $label, LinkTypeEnum $type) {
+    $element = $this->buildLinkFromText($item, $label, $type);
+    $element = $this->wrapTextResponsiveFontSize($element, FontSizeEnum::Sm);
+    $element = $this->wrapTextFontWeight($element, FontWeightEnum::Medium);
+    return $this->wrapTextCenter($element);
   }
 
   /**
@@ -54,8 +89,8 @@ trait PersonCardThemeTrait {
    * @return array
    *   A render array representing the list of person cards in a wide container.
    */
-  protected function buildElementPersonCardList($items) {
+  protected function buildElementPersonCardList($items)
+  {
     return $this->wrapContainerWide($this->buildCards($items));
   }
-
 }

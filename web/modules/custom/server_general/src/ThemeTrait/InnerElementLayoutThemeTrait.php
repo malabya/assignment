@@ -102,4 +102,27 @@ trait InnerElementLayoutThemeTrait {
     ];
   }
 
+  /**
+   * Build "Card with image horizontal" layout.
+   *
+   * @param \Drupal\Core\Url $url
+   *   The URL to link to.
+   * @param array $image
+   *   The image render array.
+   * @param array $items
+   *   The rest of the items' render array.
+   *
+   * @return array
+   *   Render array.
+   */
+  protected function buildInnerElementLayoutWithFooter(array $content, array $footer, bool $divider = FALSE): array
+  {
+    return [
+      '#theme' => 'server_theme_inner_element_layout__with_footer',
+      '#content' => $content,
+      '#footer' => $footer,
+      '#divider' => $divider,
+    ];
+  }
+
 }

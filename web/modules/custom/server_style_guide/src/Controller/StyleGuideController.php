@@ -947,8 +947,8 @@ class StyleGuideController extends ControllerBase {
         'Image alt text',
         'Jane Cooper',
         'jane.cooper@example.com',
-        '+919999999999',
         'Paradigm Representative',
+        '+919999999999',
         'Admin'
       )
     );
@@ -983,6 +983,7 @@ class StyleGuideController extends ControllerBase {
         'organization' => 'Skyreach Labs',
         'designation' => 'UX Designer',
         'email' => 'carla.m@skyreachlabs.com',
+        'phone' => '+14155551010',
       ],
       [
         'name' => 'David Patel',

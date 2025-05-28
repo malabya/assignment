@@ -589,4 +589,13 @@ trait ElementWrapThemeTrait {
     return array_filter($element);
   }
 
+  protected function wrapContainerGrid(array $elements, GridColEnum $cols = GridColEnum::Two, bool $divider = FALSE) {
+    return [
+      '#theme' => 'server_theme_container_grid',
+      '#elements' => $elements,
+      '#cols' => $cols->value,
+      '#divider' => $divider,
+    ];
+  }
+
 }
