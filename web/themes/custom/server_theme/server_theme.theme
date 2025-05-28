@@ -7,6 +7,7 @@
 
 use Drupal\Core\Url;
 use Drupal\lang_dropdown\LanguageDropdownConstants;
+use Drupal\server_general\ThemeTrait\GridColEnum;
 
 /**
  * Implements hook_theme().
@@ -509,6 +510,49 @@ function server_theme_theme() {
 
   $info['server_theme_footer'] = [
     'variables' => [],
+  ];
+
+  $info['server_theme_person_card'] = [
+    'variables' => [
+      'image' => NULL,
+      'alt' => NULL,
+      'name' => NULL,
+      'organization' => NULL,
+      'designation' => NULL,
+      'email' => NULL,
+      'phone' => NULL,
+    ],
+  ];
+
+  $info['server_theme_badge'] = [
+    'variables' => [
+      'label' => NULL,
+      'color' => NULL,
+    ],
+  ];
+
+  $info['server_theme_link_cta'] = [
+    'variables' => [
+      'link' => NULL,
+      'label' => NULL,
+      'type' => NULL,
+    ],
+  ];
+
+  $info['server_theme_container_grid'] = [
+    'variables' => [
+      'elements' => [],
+      'cols' => GridColEnum::Two,
+      'divider' => FALSE,
+    ],
+  ];
+
+  $info['server_theme_inner_element_layout__with_footer'] = [
+    'variables' => [
+      'content' => [],
+      'footer' => [],
+      'divider' => FALSE,
+    ],
   ];
 
   return $info;

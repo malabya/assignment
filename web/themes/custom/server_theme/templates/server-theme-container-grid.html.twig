@@ -1,0 +1,9 @@
+{% set classes = [
+    'grid',
+    'grid-flow-row',
+    'grid-cols-' ~ cols,
+    divider ? 'divide-x-' ~ cols ~ ' divide-gray-200 divide-solid',
+  ] %}
+<div class="{{ classes|join(' ') }}">
+  {{ elements }}
+</div>

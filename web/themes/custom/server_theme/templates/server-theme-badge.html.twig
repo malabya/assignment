@@ -1,0 +1,11 @@
+{% if color == 'gray' %}
+  {% set color_class = 'bg-gray-100 text-gray-800' %}
+{% elseif color == 'red' %}
+  {% set color_class = 'bg-red-100 text-red-800' %}
+{% elseif color == 'green' %}
+  {% set color_class = 'bg-green-100 text-green-800' %}
+{% endif %}
+
+<div class="{{ color_class }} text-xs font-medium px-2.5 py-0.5 rounded-full">
+  {{ label }}
+</div>
